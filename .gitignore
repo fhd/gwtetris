@@ -1,7 +1,8 @@
 # /
 /target
+/war
 /.settings
 /.classpath
 /.project
-/war/com.github.fhd.gwtetris.GWTetris
-/war/WEB-INF/lib
+
+
