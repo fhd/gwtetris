@@ -76,7 +76,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <runTarget>com.github.fhd.gwtetris.GWTetris/GWTetris.html</runTarget>
+                    <runTarget>GWTetris.html</runTarget>
                 </configuration>
             </plugin>
         </plugins>

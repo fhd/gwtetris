@@ -11,6 +11,18 @@ public class GWTetris implements EntryPoint {
      * The entry point method.
      */
     public void onModuleLoad() {
-        RootPanel.get().add(new Label("Hello, World!"));
+        GWTetrisResources resources = GWT.create(GWTetrisResources.class);
+        resources.css().ensureInjected();
+        
+        Label grid = new HTML("Nothing");
+        grid.setStyleName(resources.css().grid());
+        Label preview = new HTML("Here");
+        preview.setStyleName(resources.css().preview());
+        
+        FlowPanel p = new FlowPanel();
+        p.add(grid);
+        p.add(preview);
+
+        RootLayoutPanel.get().add(p);
     }
 }

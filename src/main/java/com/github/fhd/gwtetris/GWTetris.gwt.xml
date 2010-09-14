@@ -1,7 +1,5 @@
-<!DOCTYPE module PUBLIC "//gwt-module/" "http://google-web-toolkit.googlecode.com/svn/tags/1.6.2/distro-source/core/src/gwt-module.dtd">
-<module>
+<module rename-to="gwtetris">
       <inherits name="com.google.gwt.user.User"/>
       <inherits name="com.google.gwt.user.theme.standard.Standard"/>
       <entry-point class="com.github.fhd.gwtetris.client.GWTetris"/>
-      <stylesheet src="GWTetris.css"/>
 </module>
