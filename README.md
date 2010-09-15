@@ -3,7 +3,7 @@ GWTetris
 
 A Tetris clone written in Java using the Google Web Toolkit.
 
-This will be a port of [[Jetris](http://github.com/fhd/jetris) to GWT, but it
+This will be a port of [Jetris](http://github.com/fhd/jetris) to GWT, but it
 is merely a hello world application at the moment.
 
 Building
