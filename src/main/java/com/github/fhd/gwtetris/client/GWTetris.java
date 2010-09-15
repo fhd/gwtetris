@@ -1,6 +1,7 @@
 package com.github.fhd.gwtetris.client;
 
 import com.google.gwt.core.client.*;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.*;
 
 /**
@@ -12,17 +13,20 @@ public class GWTetris implements EntryPoint {
      */
     public void onModuleLoad() {
         GWTetrisResources resources = GWT.create(GWTetrisResources.class);
-        resources.css().ensureInjected();
+        GWTetrisCss css = resources.css();
+        css.ensureInjected();
         
-        Label grid = new HTML("Nothing");
-        grid.setStyleName(resources.css().grid());
-        Label preview = new HTML("Here");
-        preview.setStyleName(resources.css().preview());
-        
-        FlowPanel p = new FlowPanel();
-        p.add(grid);
-        p.add(preview);
-
-        RootLayoutPanel.get().add(p);
+        Button resumeButton = new Button("Start");
+        resumeButton.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent arg0) {
+                DecoratedPopupPanel popup = new DecoratedPopupPanel(true);
+                //popup.setWidth("150px");
+                popup.setWidget(new Label("Not implemented yet."));
+                popup.center();
+                popup.show();
+            }
+        });
+        RootPanel.get("buttons").add(resumeButton);
     }
 }
