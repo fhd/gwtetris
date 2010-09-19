@@ -21,7 +21,6 @@ public class GWTetris implements EntryPoint {
             @Override
             public void onClick(ClickEvent arg0) {
                 DecoratedPopupPanel popup = new DecoratedPopupPanel(true);
-                //popup.setWidth("150px");
                 popup.setWidget(new Label("Not implemented yet."));
                 popup.center();
                 popup.show();
