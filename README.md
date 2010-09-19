@@ -3,6 +3,8 @@ GWTetris
 
 A Tetris clone written in Java using the Google Web Toolkit.
 
+[![Flattr this](http://api.flattr.com/button/button-compact-static-100x17.png "Flattr this")](http://flattr.com/thing/63915/GWTetris)
+
 This will be a port of [Jetris](http://github.com/fhd/jetris) to GWT, but it
 is yet work in progress.
 
