@@ -23,6 +23,15 @@ To run GWTetris in the GWT development mode, execute the following:
 
 	mvn gwt:run
 
+To run GWTetris in a local Google App Engine server, first make sure that the
+GA SDK is installed:
+
+	mvn gae:unpack
+
+Then execute the following:
+
+	mvn gae:run
+
 License
 -------
 

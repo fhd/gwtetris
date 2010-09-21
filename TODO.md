@@ -7,3 +7,4 @@
 * Rewrite the core game code to provide move vectors of pieces instead of the
   complete grid matrix. Faster + possibility for animations.
 * Deploy it on Google App Engine.
+* Synchronize Maven and Google App Engine versions.
