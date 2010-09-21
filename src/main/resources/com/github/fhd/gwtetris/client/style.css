@@ -7,30 +7,30 @@ h1 {
     text-align: center;
 }
 
-#grid, #sidebar {
+.grid, .sidebar {
     float: left;
     margin: 10px;
     height: 600px;
 }
 
-#grid, #preview {
+.grid, .preview {
     background-color: rgb(50, 50, 50);
 }
 
-#grid {
+.grid {
     width: 400px;
 }
 
-#sidebar {
+.sidebar {
     position: relative;
 }
 
-#preview {
+.preview {
     width: 100px;
     height: 100px;
 }
 
-#buttons {
+.buttons {
     position: absolute;
     bottom: 0px;
     width: 100%;
@@ -38,8 +38,8 @@ h1 {
 }
 
 .block {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     background-color: rgb(99, 73, 117);
     border: solid 1px rgb(0, 0, 0);
 }

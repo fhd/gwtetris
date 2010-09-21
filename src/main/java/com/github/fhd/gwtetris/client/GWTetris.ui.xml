@@ -1,0 +1,13 @@
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <ui:with field="res" type="com.github.fhd.gwtetris.client.Resources"/>
+    <g:HTMLPanel>
+        <g:LayoutPanel ui:field="gridPanel" styleName="{res.style.grid}"/>
+        <div class="{res.style.sidebar}">
+            <g:LayoutPanel ui:field="previewPanel" styleName="{res.style.preview}"/>
+            <div class="{res.style.buttons}">
+                <g:Button ui:field="resumeButton" text="Start"/>
+            </div>
+        </div>
+    </g:HTMLPanel>
+</ui:UiBinder>
