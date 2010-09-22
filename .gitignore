@@ -5,5 +5,6 @@ target
 src/main/webapp/gwtetris
 src/main/webapp/WEB-INF/classes
 src/main/webapp/WEB-INF/lib
+src/main/webapp/META-INF
 
 
