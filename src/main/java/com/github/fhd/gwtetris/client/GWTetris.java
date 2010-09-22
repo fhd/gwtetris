@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.*;
 /**
  * The entry point and user interface of GWTetris.
  */
-public class GWTetris extends UIObject implements EntryPoint {
+class GWTetris extends UIObject implements EntryPoint {
     interface Binder extends UiBinder<Widget, GWTetris> {}
     private static Binder uiBinder = GWT.create(Binder.class);
 
@@ -33,7 +33,7 @@ public class GWTetris extends UIObject implements EntryPoint {
         style = resources.style();
         style.ensureInjected();
         game = new Game();
-        grid = new Grid(20, 30);
+        grid = new Grid(Constants.GRID_COLS, Constants.GRID_ROWS);
         RootPanel.get().add(uiBinder.createAndBindUi(this));
         resumeButton.setFocus(true);
     }
@@ -49,9 +49,11 @@ public class GWTetris extends UIObject implements EntryPoint {
                 
                 int[][] nextPieceMatrix = grid.getNextPieceMatrix();
                 int previewXOffset = previewPanel.getOffsetWidth() / 2
-                                     - (nextPieceMatrix[0].length * 20) / 2;
+                                     - (nextPieceMatrix[0].length
+                                        * Constants.BLOCK_WIDTH) / 2;
                 int previewYOffset = previewPanel.getOffsetHeight() / 2
-                                     - (nextPieceMatrix.length * 20) / 2;
+                                     - (nextPieceMatrix.length
+                                        * Constants.BLOCK_HEIGHT) / 2;
                 drawMatrix(nextPieceMatrix, previewPanel, previewXOffset,
                            previewYOffset);
             }
@@ -93,10 +95,12 @@ public class GWTetris extends UIObject implements EntryPoint {
                     HTML piece = new HTML();
                     piece.setStyleName(style.block());
                     panel.add(piece);
-                    panel.setWidgetLeftWidth(piece, xCell * 20 + xoffset,
-                                             Unit.PX, 20, Unit.PX);
-                    panel.setWidgetTopHeight(piece, yCell * 20 + yoffset, 
-                                             Unit.PX, 20, Unit.PX);
+                    panel.setWidgetLeftWidth(piece, 
+                                             xCell * Constants.BLOCK_HEIGHT + xoffset,
+                                             Unit.PX, Constants.BLOCK_WIDTH, Unit.PX);
+                    panel.setWidgetTopHeight(piece,
+                                             yCell * Constants.BLOCK_WIDTH + yoffset, 
+                                             Unit.PX, Constants.BLOCK_HEIGHT, Unit.PX);
                 }
     }
 }
