@@ -7,7 +7,7 @@
             <g:LayoutPanel ui:field="previewPanel"
                            styleName="{res.style.preview}"/>
             <div class="{res.style.buttons}">
-                <g:Button ui:field="resumeButton" text="Start"/>
+                <g:Button ui:field="resumeButton">Start</g:Button>
             </div>
         </div>
     </g:HTMLPanel>
