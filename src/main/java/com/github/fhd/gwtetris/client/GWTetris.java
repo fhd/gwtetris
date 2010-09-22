@@ -1,25 +1,15 @@
 package com.github.fhd.gwtetris.client;
 
-import com.github.fhd.gwtetris.client.game.Game;
+import com.github.fhd.gwtetris.client.game.*;
 import com.github.fhd.gwtetris.client.game.Grid;
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.*;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Event;
+import com.google.gwt.event.dom.client.*;
+import com.google.gwt.uibinder.client.*;
+import com.google.gwt.user.client.*;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event.NativePreviewHandler;
-import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.LayoutPanel;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.UIObject;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 
 /**
  * The entry point and user interface of GWTetris.
@@ -45,6 +35,7 @@ public class GWTetris extends UIObject implements EntryPoint {
         game = new Game();
         grid = new Grid(20, 30);
         RootPanel.get().add(uiBinder.createAndBindUi(this));
+        resumeButton.setFocus(true);
     }
     
     @UiHandler("resumeButton")
@@ -54,7 +45,15 @@ public class GWTetris extends UIObject implements EntryPoint {
             @Override
             public void run() {
                 grid.nextStep();
-                updateGrid(grid.getMatrix());
+                drawMatrix(grid.getMatrix(), gridPanel, 0, 0);
+                
+                int[][] nextPieceMatrix = grid.getNextPieceMatrix();
+                int previewXOffset = previewPanel.getOffsetWidth() / 2
+                                     - (nextPieceMatrix[0].length * 20) / 2;
+                int previewYOffset = previewPanel.getOffsetHeight() / 2
+                                     - (nextPieceMatrix.length * 20) / 2;
+                drawMatrix(nextPieceMatrix, previewPanel, previewXOffset,
+                           previewYOffset);
             }
         }.scheduleRepeating(Constants.STEP_TIME);
         
@@ -84,19 +83,20 @@ public class GWTetris extends UIObject implements EntryPoint {
             }
         });
     }
-    
-    private void updateGrid(int[][] matrix) {
-        gridPanel.clear();
+        
+    private void drawMatrix(int[][] matrix, LayoutPanel panel,
+                            int xoffset, int yoffset) {
+        panel.clear();
         for (int yCell = 0; yCell < matrix.length; yCell++)
             for (int xCell = 0; xCell < matrix[yCell].length; xCell++)
                 if (matrix[yCell][xCell] > 0) {
                     HTML piece = new HTML();
                     piece.setStyleName(style.block());
-                    gridPanel.add(piece);
-                    gridPanel.setWidgetLeftWidth(piece, 20 * xCell, Unit.PX,
-                                                 20, Unit.PX);
-                    gridPanel.setWidgetTopHeight(piece, 20 * yCell, Unit.PX,
-                                                 20, Unit.PX);
+                    panel.add(piece);
+                    panel.setWidgetLeftWidth(piece, xCell * 20 + xoffset,
+                                             Unit.PX, 20, Unit.PX);
+                    panel.setWidgetTopHeight(piece, yCell * 20 + yoffset, 
+                                             Unit.PX, 20, Unit.PX);
                 }
     }
 }
