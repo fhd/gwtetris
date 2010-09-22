@@ -6,25 +6,27 @@ A Tetris clone written in Java using the Google Web Toolkit.
 This is a port of [Jetris](http://github.com/fhd/jetris) to GWT. Please note
 that it is still work in progress.
 
-[![Flattr this](http://api.flattr.com/button/button-compact-static-100x17.png "Flattr this")](http://flattr.com/thing/63915/GWTetris)
+[![Flattr this]
+(http://api.flattr.com/button/button-compact-static-100x17.png "Flattr this")]
+(http://flattr.com/thing/63915/GWTetris)
 
 Building
 --------
 
-Building GWTetris is easy, just get [Apache Maven](http://maven.apache.org/)
-and execute:
-
-	mvn package
-
-You can then deploy the created WAR file on a Java application server like
-[Apache Tomcat](http://tomcat.apache.org/).
+In order to build and run GWTetris, you have to get
+[Apache Maven](http://maven.apache.org/).
 
 To run GWTetris in the GWT development mode, execute the following:
 
 	mvn gwt:run
 
+To create a WAR archive that can be deployed on a Java application server like
+[Apache Tomcat](http://tomcat.apache.org/), execute:
+
+	mvn package
+
 To run GWTetris in a local Google App Engine server, first make sure that the
-GA SDK is installed:
+GAE SDK is installed:
 
 	mvn gae:unpack
 

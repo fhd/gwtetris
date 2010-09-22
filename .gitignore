@@ -1,10 +1,9 @@
-# /
-/target
-/war/gwtetris
-/war/WEB-INF/classes
-/war/WEB-INF/lib
-/.settings
-/.classpath
-/.project
+target
+.settings
+.classpath
+.project
+src/main/webapp/gwtetris
+src/main/webapp/WEB-INF/classes
+src/main/webapp/WEB-INF/lib
 
 

@@ -1,3 +1,4 @@
+* Implement the preview.
 * Implement pause and exit.
 * Show pieces in different colours.
 * Try using GWT 2.0's LayoutPanels for the application-level layout.
@@ -6,5 +7,4 @@
 * Make the UI look better.
 * Rewrite the core game code to provide move vectors of pieces instead of the
   complete grid matrix. Faster + possibility for animations.
-* Deploy it on Google App Engine.
 * Synchronize Maven and Google App Engine versions.

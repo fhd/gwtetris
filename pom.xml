@@ -45,15 +45,10 @@
             <artifactId>gwt-user</artifactId>
             <version>${gwt.version}</version>
             <scope>provided</scope>
-        </dependency><!--
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-java-sdk</artifactId>
-            <version>${gae.version}</version>
         </dependency>
-    --></dependencies>
+    </dependencies>
     <build>
-        <outputDirectory>war/WEB-INF/classes</outputDirectory>
+        <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -83,6 +78,7 @@
                 </executions>
                 <configuration>
                     <runTarget>GWTetris.html</runTarget>
+                    <hostedWebapp>src/main/webapp</hostedWebapp>
                 </configuration>
             </plugin>
             <plugin>
