@@ -4,7 +4,8 @@
     <g:HTMLPanel>
         <g:LayoutPanel ui:field="gridPanel" styleName="{res.style.grid}"/>
         <div class="{res.style.sidebar}">
-            <g:LayoutPanel ui:field="previewPanel" styleName="{res.style.preview}"/>
+            <g:LayoutPanel ui:field="previewPanel"
+                           styleName="{res.style.preview}"/>
             <div class="{res.style.buttons}">
                 <g:Button ui:field="resumeButton" text="Start"/>
             </div>
