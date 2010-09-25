@@ -28,7 +28,7 @@ public class GameTest {
          * - The current piece moves down.
          * - The current piece can move to the left or to the right
          * - The current piece can land. If it does, it can complete one or
-         *   more lines.
+         *   more lines. It can also lead to game over.
          */
     }
 }
