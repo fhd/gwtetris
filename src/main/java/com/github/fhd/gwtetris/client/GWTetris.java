@@ -2,6 +2,7 @@ package com.github.fhd.gwtetris.client;
 
 import com.github.fhd.gwtetris.client.game.*;
 import com.github.fhd.gwtetris.client.game.Grid;
+import com.github.fhd.gwtetris.client.gamelogic.*;
 import com.google.gwt.core.client.*;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.*;
