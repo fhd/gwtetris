@@ -16,20 +16,30 @@ public class GameTest {
     }
     
     @Test
-    public void testMove() {
+    public void testNewPiece() {
         Game game = new Game();
         game.start();
-        List<Action> actions = game.move();
+        List<Action> actions = game.step();
         assertEquals(1, actions.size());
-        
-        /*
-         * What can happen?
-         * - A new piece can arrive.
-         * - The current piece moves down.
-         * - The current piece can move to the left or to the right.
-         * - The current piece can rotate.
-         * - The current piece can land. If it does, it can complete one or
-         *   more lines. It can also lead to game over.
-         */
+        assertEquals(Action.NEW_PIECE, actions.get(0));
     }
+    
+    @Test
+    public void testPieceMovesDown() {
+        Game game = new Game();
+        game.start();
+        game.step();
+        List<Action> actions = game.step();
+        assertEquals(1, actions.size());
+        assertEquals(Action.PIECE_MOVED_DOWN, actions.get(0));
+    }
+    
+    /*
+     * TODO: Write test cases to test the following:
+     * - The current piece lands and nothing else happens.
+     * - The current piece lands and completes a line.
+     * - The current piece lands and leads to game over.
+     * - The current piece moves to the left or to the right.
+     * - The current piece rotates.
+     */
 }
