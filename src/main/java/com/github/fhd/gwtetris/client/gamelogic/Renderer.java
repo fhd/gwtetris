@@ -11,8 +11,14 @@ public interface Renderer {
     void displayGrid(Grid grid);
     
     /**
-     * Displays the supplied piece. 
+     * Displays the supplied piece.
      * @param piece The piece to display.
      */
     void displayPiece(Piece piece);
+    
+    /**
+     * Updates the supplied piece.
+     * @param piece The piece to update.
+     */
+    void updatePiece(Piece piece);
 }

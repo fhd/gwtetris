@@ -39,9 +39,12 @@ class Game {
      * Proceeds the game for one step.
      */
     void step() {
-        if (currentPiece == null)
+        if (currentPiece == null) {
             currentPiece = new Piece();
-        currentPiece.y++;
-        renderer.displayPiece(currentPiece);
+            renderer.displayPiece(currentPiece);
+        } else {
+            currentPiece.y++;
+            renderer.updatePiece(currentPiece);
+        }
     }
 }

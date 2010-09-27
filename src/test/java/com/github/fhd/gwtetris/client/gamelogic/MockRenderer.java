@@ -17,4 +17,9 @@ class MockRenderer implements Renderer {
     public void displayPiece(Piece piece) {
         currentPiece = piece;
     }
+    
+    @Override
+    public void updatePiece(Piece piece) {
+        currentPiece = piece;
+    }
 }
