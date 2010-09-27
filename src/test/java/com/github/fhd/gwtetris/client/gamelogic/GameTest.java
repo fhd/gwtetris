@@ -11,7 +11,7 @@ public class GameTest {
     @Before
     public void setUp() {
         mockRenderer = new MockRenderer();
-        game = new Game(mockRenderer);
+        game = new Game(mockRenderer, 20, 30);
     }
     
     @Test
@@ -35,14 +35,29 @@ public class GameTest {
     public void pieceMovesDown() {
         game.start();
         game.step();
-        int previousPosition = mockRenderer.currentPiece.y;
+        int previousPosition = mockRenderer.currentPiece.getY();
         game.step();
-        assertEquals(1, mockRenderer.currentPiece.y - previousPosition);
+        assertEquals(1, mockRenderer.currentPiece.getY() - previousPosition);
+    }
+    
+    @Test
+    public void pieceLands() {
+        game.start();
+        game.step();
+        Piece firstPiece = mockRenderer.currentPiece;
+        int numSteps = mockRenderer.gameGrid.height
+                       - mockRenderer.currentPiece.getHeight();
+        for (int i = 0; i < numSteps; i++)
+            game.step();
+        assertSame(firstPiece, mockRenderer.currentPiece);
+        game.step();
+        assertNotSame(firstPiece, mockRenderer.currentPiece);
+        assertEquals(firstPiece.getY() + firstPiece.getHeight(),
+                     mockRenderer.gameGrid.height);
     }
     
     /*
      * TODO: Write test cases to test the following:
-     * - The current piece lands and nothing else happens.
      * - The current piece lands and completes a line.
      * - The current piece lands and leads to game over.
      * - The current piece moves to the left or to the right.
