@@ -2,36 +2,42 @@ package com.github.fhd.gwtetris.client.gamelogic;
 
 import static org.junit.Assert.*;
 
-import java.util.*;
-
 import org.junit.*;
 
 public class GameTest {
+    MockRenderer mockRenderer;
+    Game game;
+    
+    @Before
+    public void setUp() {
+        mockRenderer = new MockRenderer();
+        game = new Game(mockRenderer);
+    }
+    
     @Test
-    public void testStart() {
-        Game game = new Game();
+    public void start() {
         assertTrue(!game.isRunning());
+        assertNull(mockRenderer.gameGrid);
         game.start();
         assertTrue(game.isRunning());
+        assertNotNull(mockRenderer.gameGrid);
     }
     
     @Test
-    public void testNewPiece() {
-        Game game = new Game();
+    public void newPiece() {
         game.start();
-        List<Action> actions = game.step();
-        assertEquals(1, actions.size());
-        assertEquals(Action.NEW_PIECE, actions.get(0));
+        assertNull(mockRenderer.currentPiece);
+        game.step();
+        assertNotNull(mockRenderer.currentPiece);
     }
     
     @Test
-    public void testPieceMovesDown() {
-        Game game = new Game();
+    public void pieceMovesDown() {
         game.start();
         game.step();
-        List<Action> actions = game.step();
-        assertEquals(1, actions.size());
-        assertEquals(Action.PIECE_MOVED_DOWN, actions.get(0));
+        int previousPosition = mockRenderer.currentPiece.y;
+        game.step();
+        assertEquals(1, mockRenderer.currentPiece.y - previousPosition);
     }
     
     /*

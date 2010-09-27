@@ -1,19 +1,31 @@
 package com.github.fhd.gwtetris.client.gamelogic;
 
-import java.util.*;
 
 /**
  * The game logic.
  */
 class Game {
+    private Renderer renderer;
     private boolean running = false;
+    private Grid gameGrid;
     private Piece currentPiece;
+    
+    /**
+     * Creates a new game.
+     * @param renderer The renderer that will be used to render all actions
+     *                 within the game.
+     */
+    Game(Renderer renderer) {
+        this.renderer = renderer;
+    }
     
     /**
      * Starts the game.
      */
     void start() {
         running = true;
+        gameGrid = new Grid();
+        renderer.displayGrid(gameGrid);
     }
 
     /**
@@ -25,15 +37,11 @@ class Game {
 
     /**
      * Proceeds the game for one step.
-     * @return The actions that have occurred during this step.
      */
-    List<Action> step() {
-        List<Action> actions = new ArrayList<Action>();
-        if (currentPiece == null) {
+    void step() {
+        if (currentPiece == null)
             currentPiece = new Piece();
-            actions.add(Action.NEW_PIECE);
-        } else 
-            actions.add(Action.PIECE_MOVED_DOWN);
-        return actions;
+        currentPiece.y++;
+        renderer.displayPiece(currentPiece);
     }
 }
