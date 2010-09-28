@@ -60,19 +60,17 @@ class Piece {
     private int y;
 
     /**
+     * @param rng The random number generator used to create a random type and
+     *            position.
      * @param grid The grid in which the piece will reside.
      * @return A piece of random type and horizontal position.
      */
-    static Piece createRandomPiece(Grid grid) {
+    static Piece createRandomPiece(RNG rng, Grid grid) {
         Piece p = new Piece(
-                Type.values()[randomNum(0, Type.values().length - 1)],
+                Type.values()[rng.randomPieceTypeNo(Type.values().length)],
                 grid);
-        p.x = randomNum(0, grid.width - p.getWidth());
+        p.x = rng.randomPiecePosition(grid.width - p.getWidth());
         return p;
-    }
-    
-    private static int randomNum(int start, int end) {
-        return (int) Math.floor(Math.random() * end) + start;
     }
 
     /**
@@ -129,7 +127,9 @@ class Piece {
      * @return <code>true</code> if it was possible to move.
      */
     boolean move(int x, int y) {
-        if (this.x + x + getWidth() > grid.width
+        if (this.x + x < 0
+            || this.x + x + getWidth() > grid.width
+            || this.y + y < 0
             || this.y + y + getHeight() > grid.height)
             return false;
         this.x += x;

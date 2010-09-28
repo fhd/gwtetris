@@ -6,7 +6,7 @@ package com.github.fhd.gwtetris.client.gamelogic;
  */
 class Game {
     private Renderer renderer;
-    private boolean running = false;
+    private RNG rng;
     private Grid gameGrid;
     private Piece currentPiece;
     
@@ -14,11 +14,14 @@ class Game {
      * Creates a new game.
      * @param renderer The renderer that will be used to render all actions
      *                 within the game.
+     * @param rng The random number generator that will be used to create all
+     *            required random numbers.
      * @param width The game grid's width in blocks.
      * @param height The game grid's height in blocks.
      */
-    Game(Renderer renderer, int width, int height) {
+    Game(Renderer renderer, RNG rng, int width, int height) {
         this.renderer = renderer;
+        this.rng = rng;
         this.gameGrid = new Grid(width, height);
     }
     
@@ -26,15 +29,7 @@ class Game {
      * Starts the game.
      */
     void start() {
-        running = true;
         renderer.displayGrid(gameGrid);
-    }
-
-    /**
-     * @return <code>true</code> if the game has been started.
-     */
-    boolean isRunning() {
-        return running;
     }
 
     /**
@@ -45,6 +40,6 @@ class Game {
             renderer.updatePiece(currentPiece);
         else
             renderer.displayPiece(
-                    currentPiece = Piece.createRandomPiece(gameGrid));
+                    currentPiece = Piece.createRandomPiece(rng, gameGrid));
     }
 }

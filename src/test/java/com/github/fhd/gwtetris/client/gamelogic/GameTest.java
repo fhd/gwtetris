@@ -6,20 +6,20 @@ import org.junit.*;
 
 public class GameTest {
     MockRenderer mockRenderer;
+    MockRNG mockRNG;
     Game game;
     
     @Before
     public void setUp() {
         mockRenderer = new MockRenderer();
-        game = new Game(mockRenderer, 20, 30);
+        mockRNG = new MockRNG();
+        game = new Game(mockRenderer, mockRNG, 20, 30);
     }
     
     @Test
     public void start() {
-        assertTrue(!game.isRunning());
         assertNull(mockRenderer.gameGrid);
         game.start();
-        assertTrue(game.isRunning());
         assertNotNull(mockRenderer.gameGrid);
     }
     
@@ -55,12 +55,36 @@ public class GameTest {
         assertEquals(firstPiece.getY() + firstPiece.getHeight(),
                      mockRenderer.gameGrid.height);
     }
-    
+
+    @Test
+    public void pieceMovesLeft() {
+        game.start();
+        mockRNG.piecePosition = 1;
+        game.step();
+        Piece piece = mockRenderer.currentPiece;
+        assertTrue(piece.move(-1, 0));
+        assertEquals(0, piece.getX());
+        assertFalse(piece.move(-1, 0));
+        assertEquals(0, piece.getX());
+    }
+
+    @Test
+    public void pieceMovesRight() {
+        game.start();
+        mockRNG.piecePosition = 0;
+        game.step();
+        Piece piece = mockRenderer.currentPiece;
+        int expectedPosition = mockRenderer.gameGrid.width - piece.getWidth();
+        assertTrue(piece.move(expectedPosition, 0));
+        assertEquals(expectedPosition, piece.getX());
+        assertFalse(piece.move(1, 0));
+        assertEquals(expectedPosition, piece.getX());
+    }
+
     /*
      * TODO: Write test cases to test the following:
      * - The current piece lands and completes a line.
      * - The current piece lands and leads to game over.
-     * - The current piece moves to the left or to the right.
      * - The current piece rotates.
      */
 }
