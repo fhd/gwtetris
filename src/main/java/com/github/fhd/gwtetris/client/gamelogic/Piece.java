@@ -9,33 +9,19 @@ public class Piece {
      * named after upper-case letters.
      */
     public enum Type {
-        I(1, new int[][] {
-                { 1, 1, 1, 1 }
-        }),
-        J(2, new int[][] {
-                { 1, 0, 0 },
-                { 1, 1, 1 }
-        }),
-        L(3, new int[][] {
-                { 0, 0, 1 },
-                { 1, 1, 1 }
-        }),
-        O(4, new int[][] {
-                { 1, 1 },
-                { 1, 1 }
-        }),
-        S(5, new int[][] {
-                { 0, 1, 1 },
-                { 1, 1, 0 }
-        }),
-        T(6, new int[][] {
-                { 0, 1, 0 },
-                { 1, 1, 1 }
-        }),
-        Z(7, new int[][] {
-                { 1, 1, 0 },
-                { 0, 1, 1 }
-        });
+        I(1, new int[][] {{1, 1, 1, 1}}),
+        J(2, new int[][] {{1, 0, 0},
+                          {1, 1, 1}}),
+        L(3, new int[][] {{0, 0, 1},
+                          {1, 1, 1}}),
+        O(4, new int[][] {{1, 1},
+                          {1, 1}}),
+        S(5, new int[][] {{0, 1, 1},
+                          {1, 1, 0}}),
+        T(6, new int[][] {{0, 1, 0},
+                          {1, 1, 1}}),
+        Z(7, new int[][] {{1, 1, 0},
+                          {0, 1, 1}});
 
         private int typeNo;
         private int[][] matrix;
