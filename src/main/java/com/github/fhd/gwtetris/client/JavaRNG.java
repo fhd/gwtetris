@@ -13,7 +13,7 @@ class JavaRNG implements RNG {
 
     @Override
     public int randomPieceTypeNo(int numTypes) {
-        return randomNum(0, numTypes - 1);
+        return randomNum(1, numTypes - 1);
     }
 
     private static int randomNum(int start, int end) {

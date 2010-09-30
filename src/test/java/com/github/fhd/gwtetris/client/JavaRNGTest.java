@@ -11,15 +11,19 @@ public class JavaRNGTest {
     
     @Test
     public void randomPiecePosition() {
-        int r = rng.randomPiecePosition(5);
-        assertTrue("r <" + r + "> was not within the expected range",
-                   r >= 0 && r <= 5);
+        for (int i = 0; i < 20; i++) {
+            int r = rng.randomPiecePosition(i);
+            assertTrue("r <" + r + "> was not within the expected range",
+                       r >= 0 && r <= i);
+        }
     }
     
     @Test
     public void randomPieceTypeNo() {
-        int r = rng.randomPieceTypeNo(5);
-        assertTrue("r <" + r + "> was not within the expected range",
-                   r >= 0 && r < 5);
+        for (int i = 2; i < 20; i++) {
+            int r = rng.randomPieceTypeNo(i);
+            assertTrue("r <" + r + "> was not within the expected range",
+                       r > 0 && r < i);
+        }
     }
 }

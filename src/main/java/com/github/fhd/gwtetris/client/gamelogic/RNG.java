@@ -7,7 +7,7 @@ public interface RNG {
     /**
      * Returns a random typeNo identifying the type of a piece.
      * @param numTypes The number of available types.
-     * @return A random number between 0 and the maximum possible typeNo.
+     * @return A random number between 1 and the maximum possible typeNo.
      */
     int randomPieceTypeNo(int numTypes);
 
