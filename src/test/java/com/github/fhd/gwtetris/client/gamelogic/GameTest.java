@@ -5,6 +5,13 @@ import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.*;
 
+
+/*
+ * TODO: Test the following:
+ * - The current piece lands and completes a line.
+ * - The current piece lands and leads to game over.
+ */
+
 public class GameTest {
     MockRenderer mockRenderer;
     MockRNG mockRNG;
@@ -101,10 +108,4 @@ public class GameTest {
         assertThat(mockRenderer.gameGrid.height,
                    is(firstPiece.getY() + firstPiece.getHeight()));
     }
-    
-    /*
-     * TODO: Write test cases to test the following:
-     * - The current piece lands and completes a line.
-     * - The current piece lands and leads to game over.
-     */
 }
