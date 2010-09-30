@@ -5,7 +5,6 @@ import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.*;
 
-
 /*
  * TODO: Test the following:
  * - The current piece lands and completes a line.
