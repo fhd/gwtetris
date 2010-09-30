@@ -55,7 +55,7 @@ public class Piece {
      */
     static Piece createRandomPiece(RNG rng, Grid grid) {
         Piece p = new Piece(rng.randomPieceType(), grid);
-        p.x = rng.randomPiecePosition(grid.width - p.getWidth());
+        p.x = rng.randomPiecePosition(grid.getWidth() - p.getWidth());
         return p;
     }
 
@@ -123,9 +123,9 @@ public class Piece {
      */
     boolean move(int x, int y) {
         if (this.x + x < 0
-            || this.x + x + getWidth() > grid.width
+            || this.x + x + getWidth() > grid.getWidth()
             || this.y + y < 0
-            || this.y + y + getHeight() > grid.height)
+            || this.y + y + getHeight() > grid.getHeight())
             return false;
         this.x += x;
         this.y += y;

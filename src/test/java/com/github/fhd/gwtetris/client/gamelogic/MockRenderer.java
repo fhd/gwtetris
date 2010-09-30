@@ -5,9 +5,23 @@ package com.github.fhd.gwtetris.client.gamelogic;
  * test the game logic.
  */
 class MockRenderer implements Renderer {
-    Grid gameGrid;
-    Piece currentPiece;
+    private Grid gameGrid;
+    private Piece currentPiece;
 
+    /**
+     * @return The last grid that was displayed.
+     */
+    Grid getGameGrid() {
+        return gameGrid;
+    }
+
+    /**
+     * @return The last piece that was displayed.
+     */
+    Piece getCurrentPiece() {
+        return currentPiece;
+    }
+    
     @Override
     public void displayGrid(Grid grid) {
         gameGrid = grid;

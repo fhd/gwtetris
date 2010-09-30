@@ -25,34 +25,35 @@ public class GameTest {
     
     @Test
     public void start() {
-        assertThat(mockRenderer.gameGrid, nullValue());
+        assertThat(mockRenderer.getGameGrid(), nullValue());
         game.start();
-        assertThat(mockRenderer.gameGrid, notNullValue());
+        assertThat(mockRenderer.getGameGrid(), notNullValue());
     }
     
     @Test
     public void newPiece() {
         game.start();
-        assertThat(mockRenderer.currentPiece, nullValue());
+        assertThat(mockRenderer.getCurrentPiece(), nullValue());
         game.step();
-        assertThat(mockRenderer.currentPiece, notNullValue());
+        assertThat(mockRenderer.getCurrentPiece(), notNullValue());
     }
     
     @Test
     public void pieceMovesDown() {
         game.start();
         game.step();
-        int previousPosition = mockRenderer.currentPiece.getY();
+        int previousPosition = mockRenderer.getCurrentPiece().getY();
         game.step();
-        assertThat(mockRenderer.currentPiece.getY(), is(previousPosition + 1));
+        assertThat(mockRenderer.getCurrentPiece().getY(),
+                   is(previousPosition + 1));
     }
 
     @Test
     public void pieceMovesLeft() {
         game.start();
-        mockRNG.piecePosition = 1;
+        mockRNG.setPiecePosition(1);
         game.step();
-        Piece piece = mockRenderer.currentPiece;
+        Piece piece = mockRenderer.getCurrentPiece();
         assertThat(piece.move(-1, 0), is(true));
         assertThat(piece.getX(), is(0));
         assertThat(piece.move(-1, 0), is(false));
@@ -62,10 +63,11 @@ public class GameTest {
     @Test
     public void pieceMovesRight() {
         game.start();
-        mockRNG.piecePosition = 0;
+        mockRNG.setPiecePosition(0);
         game.step();
-        Piece piece = mockRenderer.currentPiece;
-        int expectedPosition = mockRenderer.gameGrid.width - piece.getWidth();
+        Piece piece = mockRenderer.getCurrentPiece();
+        int expectedPosition = mockRenderer.getGameGrid().getWidth()
+                               - piece.getWidth();
         assertThat(piece.move(expectedPosition, 0), is(true));
         assertThat(piece.getX(), is(expectedPosition));
         assertThat(piece.move(1, 0), is(false));
@@ -75,10 +77,10 @@ public class GameTest {
     @Test
     public void pieceRotates() {
         game.start();
-        mockRNG.piecePosition = 10;
-        mockRNG.pieceType = Piece.Type.I;
+        mockRNG.setPiecePosition(10);
+        mockRNG.setPieceType(Piece.Type.I);
         game.step();
-        Piece p = mockRenderer.currentPiece;
+        Piece p = mockRenderer.getCurrentPiece();
         int[][] originalMatrix = p.getMatrix(); 
         p.rotate();
         int[][] rotatedMatrix = p.getMatrix();
@@ -96,15 +98,16 @@ public class GameTest {
     public void pieceLands() {
         game.start();
         game.step();
-        Piece firstPiece = mockRenderer.currentPiece;
-        int numSteps = mockRenderer.gameGrid.height
-                       - mockRenderer.currentPiece.getHeight();
+        Piece firstPiece = mockRenderer.getCurrentPiece();
+        int numSteps = mockRenderer.getGameGrid().getHeight()
+                       - mockRenderer.getCurrentPiece().getHeight();
         for (int i = 0; i < numSteps; i++)
             game.step();
-        assertThat(mockRenderer.currentPiece, sameInstance(firstPiece));
+        assertThat(mockRenderer.getCurrentPiece(), sameInstance(firstPiece));
         game.step();
-        assertThat(mockRenderer.currentPiece, not(sameInstance(firstPiece)));
-        assertThat(mockRenderer.gameGrid.height,
+        assertThat(mockRenderer.getCurrentPiece(),
+                   not(sameInstance(firstPiece)));
+        assertThat(mockRenderer.getGameGrid().getHeight(),
                    is(firstPiece.getY() + firstPiece.getHeight()));
     }
 }
