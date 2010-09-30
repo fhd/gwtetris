@@ -3,12 +3,12 @@ package com.github.fhd.gwtetris.client.gamelogic;
 /**
  * A piece (i.e. a tetromino) - the central element in this game. 
  */
-class Piece {
+public class Piece {
     /**
      * The type of piece. Pieces come in several forms, looking like and hence
      * named after upper-case letters.
      */
-    enum Type {
+    public enum Type {
         I(1, new int[][] {
                 { 1, 1, 1, 1 }
         }),
@@ -45,11 +45,11 @@ class Piece {
             this.matrix = matrix;
         }
         
-        int typeNo() {
+        public int getTypeNo() {
             return this.typeNo;
         }
         
-        int[][] matrix() {
+        int[][] getMatrix() {
             return this.matrix;
         }
     }
@@ -58,6 +58,8 @@ class Piece {
     private Grid grid;
     private int x;
     private int y;
+    private int rotation;
+    private int[][] matrix;
 
     /**
      * @param rng The random number generator used to create a random type and
@@ -66,9 +68,7 @@ class Piece {
      * @return A piece of random type and horizontal position.
      */
     static Piece createRandomPiece(RNG rng, Grid grid) {
-        Piece p = new Piece(
-                Type.values()[rng.randomPieceTypeNo(Type.values().length)],
-                grid);
+        Piece p = new Piece(rng.randomPieceType(), grid);
         p.x = rng.randomPiecePosition(grid.width - p.getWidth());
         return p;
     }
@@ -81,6 +81,7 @@ class Piece {
     Piece(Type type, Grid grid) {
         this.type = type;
         this.grid = grid;
+        matrix = type.getMatrix();
     }
 
     /**
@@ -108,14 +109,22 @@ class Piece {
      * The width of the piece in blocks.
      */
     int getWidth() {
-        return type.matrix()[0].length;
+        return type.getMatrix()[0].length;
     }
     
     /**
      * The height of the piece in blocks.
      */
     int getHeight() {
-        return type.matrix().length;
+        return type.getMatrix().length;
+    }
+
+
+    /**
+     * @return The matrix representation of this piece.
+     */
+    int[][] getMatrix() {
+        return matrix;
     }
 
     /**
@@ -135,5 +144,21 @@ class Piece {
         this.x += x;
         this.y += y;
         return true;
+    }
+
+    /**
+     * Rotates the piece clockwise.
+     */
+    void rotate() {
+        if (rotation >= 3)
+            rotation = 0;
+        else
+            rotation++;
+
+        int[][] previousMatrix = matrix;
+        matrix = new int[previousMatrix[0].length][previousMatrix.length];
+        for (int y = 0; y < previousMatrix.length; y++)
+            for (int x = 0; x < previousMatrix[y].length; x++)
+                matrix[x][previousMatrix.length - 1 - y] = previousMatrix[y][x];
     }
 }

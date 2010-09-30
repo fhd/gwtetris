@@ -13,17 +13,16 @@ public class JavaRNGTest {
     public void randomPiecePosition() {
         for (int i = 0; i < 20; i++) {
             int r = rng.randomPiecePosition(i);
-            assertTrue("r <" + r + "> was not within the expected range",
+            assertTrue("<" + r + "> was not within the expected range",
                        r >= 0 && r <= i);
         }
     }
     
     @Test
-    public void randomPieceTypeNo() {
-        for (int i = 2; i < 20; i++) {
-            int r = rng.randomPieceTypeNo(i);
-            assertTrue("r <" + r + "> was not within the expected range",
-                       r > 0 && r < i);
-        }
+    public void randomPieceType() {
+        Piece.Type r = rng.randomPieceType();
+        int rTypeNo = r.getTypeNo();
+        assertTrue("<" + rTypeNo + "> was not within the expected range",
+                   rTypeNo >= 1 && rTypeNo < Piece.Type.values().length);
     }
 }

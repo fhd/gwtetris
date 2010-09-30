@@ -5,15 +5,11 @@ package com.github.fhd.gwtetris.client.gamelogic;
  */
 public interface RNG {
     /**
-     * Returns a random typeNo identifying the type of a piece.
-     * @param numTypes The number of available types.
-     * @return A random number between 1 and the maximum possible typeNo.
+     * @return A random piece type.
      */
-    int randomPieceTypeNo(int numTypes);
+    Piece.Type randomPieceType();
 
     /**
-     * Returns a random position for a piece. Works for both x and y
-     * coordinates.
      * @param maxPos The maximum possible position.
      * @return A random x or y coordinate for a piece.
      */

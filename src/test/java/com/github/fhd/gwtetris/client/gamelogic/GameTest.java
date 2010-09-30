@@ -1,6 +1,7 @@
 package com.github.fhd.gwtetris.client.gamelogic;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.*;
 
@@ -39,22 +40,6 @@ public class GameTest {
         game.step();
         assertEquals(1, mockRenderer.currentPiece.getY() - previousPosition);
     }
-    
-    @Test
-    public void pieceLands() {
-        game.start();
-        game.step();
-        Piece firstPiece = mockRenderer.currentPiece;
-        int numSteps = mockRenderer.gameGrid.height
-                       - mockRenderer.currentPiece.getHeight();
-        for (int i = 0; i < numSteps; i++)
-            game.step();
-        assertSame(firstPiece, mockRenderer.currentPiece);
-        game.step();
-        assertNotSame(firstPiece, mockRenderer.currentPiece);
-        assertEquals(firstPiece.getY() + firstPiece.getHeight(),
-                     mockRenderer.gameGrid.height);
-    }
 
     @Test
     public void pieceMovesLeft() {
@@ -81,10 +66,46 @@ public class GameTest {
         assertEquals(expectedPosition, piece.getX());
     }
 
+    @Test
+    public void pieceRotates() {
+        game.start();
+        mockRNG.piecePosition = 10;
+        mockRNG.pieceType = Piece.Type.I;
+        game.step();
+        Piece p = mockRenderer.currentPiece;
+        int[][] originalMatrix = p.getMatrix(); 
+        p.rotate();
+        int[][] rotatedMatrix = p.getMatrix();
+        assertThat(rotatedMatrix, not(is(originalMatrix)));
+        assertThat(rotatedMatrix, is(new int[][] {{1},
+                                                  {1},
+                                                  {1},
+                                                  {1}}));
+        p.rotate();
+        assertThat(p.getMatrix(), is(originalMatrix));
+        p.rotate();
+        assertThat(p.getMatrix(), is(rotatedMatrix));
+    }
+    
+    @Test
+    public void pieceLands() {
+        game.start();
+        game.step();
+        Piece firstPiece = mockRenderer.currentPiece;
+        int numSteps = mockRenderer.gameGrid.height
+                       - mockRenderer.currentPiece.getHeight();
+        for (int i = 0; i < numSteps; i++)
+            game.step();
+        assertSame(firstPiece, mockRenderer.currentPiece);
+        game.step();
+        assertNotSame(firstPiece, mockRenderer.currentPiece);
+        assertEquals(firstPiece.getY() + firstPiece.getHeight(),
+                     mockRenderer.gameGrid.height);
+    }
+    
     /*
      * TODO: Write test cases to test the following:
      * - The current piece lands and completes a line.
      * - The current piece lands and leads to game over.
-     * - The current piece rotates.
      */
 }

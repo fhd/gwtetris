@@ -6,7 +6,7 @@ package com.github.fhd.gwtetris.client.gamelogic;
  */
 class MockRNG implements RNG {
     int piecePosition = 0;
-    int pieceTypeNo = 0;
+    Piece.Type pieceType = Piece.Type.I;
     
     @Override
     public int randomPiecePosition(int maxPos) {
@@ -14,7 +14,7 @@ class MockRNG implements RNG {
     }
 
     @Override
-    public int randomPieceTypeNo(int numTypes) {
-        return pieceTypeNo;
+    public Piece.Type randomPieceType() {
+        return pieceType;
     }
 }
