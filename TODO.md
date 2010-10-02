@@ -5,3 +5,4 @@
 * Use Constants in CSS via CssResource.
 * Make the UI look better.
 * Use GWT's I18N mechanisms for text.
+* Implement a high score.

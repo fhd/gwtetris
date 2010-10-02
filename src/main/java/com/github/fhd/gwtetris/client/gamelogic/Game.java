@@ -38,8 +38,11 @@ class Game {
     void step() {
         if (currentPiece != null && currentPiece.move(0, 1))
             renderer.updatePiece(currentPiece);
-        else
+        else {
+            if (currentPiece != null)
+                gameGrid.insertPiece(currentPiece);
             renderer.displayPiece(
                     currentPiece = Piece.createRandomPiece(rng, gameGrid));
+        }
     }
 }
