@@ -44,7 +44,6 @@ public class Piece {
     private Grid grid;
     private int x;
     private int y;
-    private int rotation;
     private int[][] matrix;
 
     /**
@@ -136,11 +135,6 @@ public class Piece {
      * Rotates the piece clockwise.
      */
     void rotate() {
-        if (rotation >= 3)
-            rotation = 0;
-        else
-            rotation++;
-
         int[][] previousMatrix = matrix;
         matrix = new int[previousMatrix[0].length][previousMatrix.length];
         for (int y = 0; y < previousMatrix.length; y++)
