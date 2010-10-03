@@ -163,6 +163,35 @@ public class GameTest {
     }
 
     @Test
+    public void piling() {
+        mockRNG.setPieceType(Piece.Type.Z);
+        game.start();
+        game.step();
+        mockRenderer.getCurrentPiece().rotate();
+        game.fastStep();
+        mockRenderer.getCurrentPiece().rotate();
+        game.fastStep();
+
+        Grid gameGrid = mockRenderer.getGameGrid();
+        int gridHeight = gameGrid.getHeight();
+        int[] expectedColumn1 = new int[gridHeight];
+        Arrays.fill(expectedColumn1, 28, 32, 1);
+        int[] expectedColumn2 = new int[gridHeight];
+        Arrays.fill(expectedColumn2, 27, 31, 1);
+
+        int[][] gridMatrix = gameGrid.getMatrix();
+        int[] actualColumn1 = new int[gridHeight];
+        int[] actualColumn2 = new int[gridHeight];
+        for (int i = 0; i < gridHeight; i++) {
+            actualColumn1[i] = gridMatrix[i][0];
+            actualColumn2[i] = gridMatrix[i][1];
+        }
+
+        assertThat(actualColumn1, is(expectedColumn1));
+        assertThat(actualColumn2, is(expectedColumn2));
+    }
+
+    @Test
     public void gameOver() {
         mockRNG.setPiecePosition(0);
         mockRNG.setPieceType(Piece.Type.I);

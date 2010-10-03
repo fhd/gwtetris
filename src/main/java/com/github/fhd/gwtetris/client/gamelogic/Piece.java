@@ -141,9 +141,9 @@ public class Piece {
             return true;
 
         int[][] gridMatrix = grid.getMatrix();
-        for (int i = y; i < y + height; i++)
-            for (int j = x; j < x + width; j++)
-                if (gridMatrix[i][j] > 0)
+        for (int i = 0; i < matrix.length; i++)
+            for (int j = 0; j < matrix[i].length; j++)
+                if (matrix[i][j] > 0 && gridMatrix[i + y][j + x] > 0)
                     return true;
 
         return false;

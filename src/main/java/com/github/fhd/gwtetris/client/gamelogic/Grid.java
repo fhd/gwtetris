@@ -51,8 +51,11 @@ public class Grid {
         int[][] pieceMatrix = piece.getMatrix();
         for (int i = 0; i < pieceMatrix.length; i++) {
             int[] line = pieceMatrix[i];
-            for (int j = 0; j < line.length; j++)
-                matrix[piece.getY() + i][piece.getX() + j] = line[j];
+            for (int j = 0; j < line.length; j++) {
+                int block = line[j];
+                if (block > 0)
+                    matrix[piece.getY() + i][piece.getX() + j] = block;
+            }
         }
         removeCompletedLines();
     }
