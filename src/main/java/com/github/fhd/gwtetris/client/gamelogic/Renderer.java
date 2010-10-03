@@ -22,6 +22,12 @@ public interface Renderer {
     void displayPiece(Piece piece);
 
     /**
+     * Displays the next piece.
+     * @param piece The piece that will be displayed after the current piece.
+     */
+    void displayNextPiece(Piece piece);
+
+    /**
      * Updates the current piece.
      */
     void updatePiece();

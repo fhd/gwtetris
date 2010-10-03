@@ -8,6 +8,7 @@ class MockRenderer implements Renderer {
     private Grid gameGrid;
     int timesGridUpdated;
     private Piece currentPiece;
+    private Piece nextPiece;
     int timesPieceUpdated;
     boolean gameOver;
 
@@ -31,6 +32,13 @@ class MockRenderer implements Renderer {
     Piece getCurrentPiece() {
         return currentPiece;
     }
+
+    /**
+     * @return The next piece that is going to be displayed.
+     */
+    public Piece getNextPiece() {
+        return nextPiece;
+    }    
 
     /**
      * @return The number of times the current piece has been updated.
@@ -61,6 +69,11 @@ class MockRenderer implements Renderer {
     public void displayPiece(Piece piece) {
         currentPiece = piece;
         timesPieceUpdated = 0;
+    }
+
+    @Override
+    public void displayNextPiece(Piece piece) {
+        nextPiece = piece;
     }
     
     @Override

@@ -9,6 +9,7 @@ public class Game {
     private RNG rng;
     private Grid gameGrid;
     private Piece currentPiece;
+    private Piece nextPiece;
 
     /**
      * Creates a new game.
@@ -30,6 +31,7 @@ public class Game {
      */
     public void start() {
         renderer.displayGrid(gameGrid);
+        nextPiece = Piece.createRandomPiece(rng, gameGrid);
     }
 
     /**
@@ -43,8 +45,10 @@ public class Game {
                 gameGrid.insertPiece(currentPiece);
                 renderer.updateGrid();
             }
-            currentPiece = Piece.createRandomPiece(rng, gameGrid);
+            currentPiece = nextPiece;
+            nextPiece = Piece.createRandomPiece(rng, gameGrid);
             renderer.displayPiece(currentPiece);
+            renderer.displayNextPiece(nextPiece);
             if (gameGrid.isFilled())
                 renderer.displayGameOver();
         }

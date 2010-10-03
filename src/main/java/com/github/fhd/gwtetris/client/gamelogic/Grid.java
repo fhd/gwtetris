@@ -109,7 +109,7 @@ public class Grid {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < matrix.length; i++)
-            builder.append(Arrays.toString(matrix[i]));
+            builder.append(Arrays.toString(matrix[i]) + "\n");
         return builder.toString();
     }
 }

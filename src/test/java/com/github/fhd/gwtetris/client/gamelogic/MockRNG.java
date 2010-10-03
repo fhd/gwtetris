@@ -6,7 +6,7 @@ package com.github.fhd.gwtetris.client.gamelogic;
  */
 class MockRNG implements RNG {
     int piecePosition = 0;
-    Piece.Type pieceType = Piece.Type.I;
+    private Piece.Type pieceType = Piece.Type.I;
 
     /**
      * @param piecePosition The fixed piece position that will be returned

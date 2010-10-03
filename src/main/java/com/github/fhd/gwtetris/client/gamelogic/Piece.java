@@ -163,8 +163,9 @@ public class Piece {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
+        builder.append("(" + x + ", " + y + ")\n");
         for (int i = 0; i < matrix.length; i++)
-            builder.append(Arrays.toString(matrix[i]));
+            builder.append(Arrays.toString(matrix[i]) + "\n");
         return builder.toString();
     }
 }

@@ -112,6 +112,11 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
     }
 
     @Override
+    public void displayNextPiece(Piece piece) {
+        drawMatrix(piece.getMatrix(), previewPanel);
+    }
+
+    @Override
     public void updatePiece() {
         // TODO: Move/rotate the piece.
     }
