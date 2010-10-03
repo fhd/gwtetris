@@ -84,11 +84,15 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
 
     @Override
     public void updateGrid() {
-        System.out.println("Updating grid.");
         drawMatrix(grid.getMatrix(), gridPanel);
     }
 
     private void drawMatrix(int[][] matrix, LayoutPanel panel) {
+        drawMatrix(matrix, panel, 0, 0);
+    }
+    
+    private void drawMatrix(int[][] matrix, LayoutPanel panel,
+                            int xOffset, int yOffset) {
         panel.clear();
         for (int yCell = 0; yCell < matrix.length; yCell++)
             for (int xCell = 0; xCell < matrix[yCell].length; xCell++)
@@ -97,10 +101,10 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
                     block.setStyleName(style.block());
                     panel.add(block);
                     panel.setWidgetLeftWidth(block, 
-                            xCell * Constants.BLOCK_HEIGHT,
+                            xCell * Constants.BLOCK_HEIGHT + xOffset,
                             Unit.PX, Constants.BLOCK_WIDTH, Unit.PX);
                     panel.setWidgetTopHeight(block,
-                            yCell * Constants.BLOCK_WIDTH, 
+                            yCell * Constants.BLOCK_WIDTH + yOffset, 
                             Unit.PX, Constants.BLOCK_HEIGHT, Unit.PX);
                 }
     }
@@ -113,7 +117,12 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
 
     @Override
     public void displayNextPiece(Piece piece) {
-        drawMatrix(piece.getMatrix(), previewPanel);
+        int[][] pieceMatrix = piece.getMatrix();
+        int xOffset = previewPanel.getOffsetWidth() / 2
+                      - (pieceMatrix[0].length * Constants.BLOCK_WIDTH) / 2;
+        int yOffset = previewPanel.getOffsetHeight() / 2
+                      - (pieceMatrix.length * Constants.BLOCK_HEIGHT) / 2;
+        drawMatrix(pieceMatrix, previewPanel, xOffset, yOffset);
     }
 
     @Override
