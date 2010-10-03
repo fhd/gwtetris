@@ -6,7 +6,9 @@ package com.github.fhd.gwtetris.client.gamelogic;
  */
 class MockRenderer implements Renderer {
     private Grid gameGrid;
+    int timesGridUpdated;
     private Piece currentPiece;
+    int timesPieceUpdated;
     boolean gameOver;
 
     /**
@@ -17,10 +19,24 @@ class MockRenderer implements Renderer {
     }
 
     /**
+     * @return The number of times the grid has been updated.
+     */
+    int getTimesGridUpdated() {
+        return timesGridUpdated;
+    }
+
+    /**
      * @return The last piece that was displayed.
      */
     Piece getCurrentPiece() {
         return currentPiece;
+    }
+
+    /**
+     * @return The number of times the current piece has been updated.
+     */
+    int getTimesPieceUpdated() {
+        return timesPieceUpdated;
     }
 
     /**
@@ -33,16 +49,23 @@ class MockRenderer implements Renderer {
     @Override
     public void displayGrid(Grid grid) {
         gameGrid = grid;
+        timesGridUpdated = 0;
     }
-    
+
+    @Override
+    public void updateGrid() {
+        timesGridUpdated++;
+    }
+
     @Override
     public void displayPiece(Piece piece) {
         currentPiece = piece;
+        timesPieceUpdated = 0;
     }
     
     @Override
-    public void updatePiece(Piece piece) {
-        currentPiece = piece;
+    public void updatePiece() {
+        timesPieceUpdated++;
     }
 
     @Override

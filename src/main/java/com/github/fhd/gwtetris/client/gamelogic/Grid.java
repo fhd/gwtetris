@@ -1,9 +1,11 @@
 package com.github.fhd.gwtetris.client.gamelogic;
 
+import java.util.*;
+
 /**
  * The grid which contains the pieces and represents the board of the game.
  */
-class Grid {
+public class Grid {
     private int width;
     private int height;
     private int[][] matrix;
@@ -101,5 +103,13 @@ class Grid {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < matrix.length; i++)
+            builder.append(Arrays.toString(matrix[i]));
+        return builder.toString();
     }
 }

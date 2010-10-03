@@ -15,7 +15,7 @@ public class GameTest {
     public void setUp() {
         mockRenderer = new MockRenderer();
         mockRNG = new MockRNG();
-        game = new Game(mockRenderer, mockRNG, 20, 30);
+        game = new Game(mockRenderer, mockRNG, 20, 32);
     }
 
     @Test
@@ -41,6 +41,7 @@ public class GameTest {
         game.step();
         assertThat(mockRenderer.getCurrentPiece().getY(),
                    is(previousPosition + 1));
+        assertThat(mockRenderer.getTimesPieceUpdated(), is(1));
     }
 
     @Test
@@ -84,6 +85,10 @@ public class GameTest {
         assertThat(p.getMatrix(), is(originalMatrix));
         p.rotate();
         assertThat(p.getMatrix(), is(rotatedMatrix));
+        /*
+         * TODO: Test that the piece does not rotate if it would hit another
+         *       piece or the grid boundary.
+         */
     }
 
     @Test
@@ -103,6 +108,7 @@ public class GameTest {
         Arrays.fill(expectedLastLine, 0, 4, 1);
         int[][] gridMatrix = gameGrid.getMatrix();
         assertThat(gridMatrix[gridMatrix.length - 1], is(expectedLastLine));
+        assertThat(mockRenderer.getTimesGridUpdated(), is(1));
     }
 
     private void landCurrentPiece() {
@@ -120,7 +126,7 @@ public class GameTest {
         game.start();
         Grid gameGrid = mockRenderer.getGameGrid();
         int gridWidth = gameGrid.getWidth();
-        assertThat(gridWidth % 2, is(0));
+        assertThat(gridWidth % 4, is(0));
         mockRNG.setPieceType(Piece.Type.I);
 
         for (int i = 0; i < gridWidth / 4; i++) {
@@ -137,6 +143,7 @@ public class GameTest {
         game.step();
         Arrays.fill(expectedLastLine, 0);
         assertThat(gridMatrix[gridMatrix.length - 1], is(expectedLastLine));
+        assertThat(mockRenderer.getTimesGridUpdated(), is(gridWidth / 4));
     }
 
     @Test
@@ -145,14 +152,15 @@ public class GameTest {
         assertThat(mockRenderer.isGameOver(), is(false));
         Grid gameGrid = mockRenderer.getGameGrid();
         int gridHeight = gameGrid.getHeight();
-        assertThat(gridHeight % 2, is(0));
+        assertThat(gridHeight % 4, is(0));
 
         mockRNG.setPiecePosition(0);
         mockRNG.setPieceType(Piece.Type.I);
+        game.step();
         for (int i = 0; i < gridHeight / 4; i++) {
-            game.step();
-            mockRenderer.getCurrentPiece().rotate();
-            for (int j = 0; j < gridHeight; j++)
+            Piece currentPiece = mockRenderer.getCurrentPiece();
+            currentPiece.rotate();
+            while (currentPiece == mockRenderer.getCurrentPiece())
                 game.step();
         }
 
@@ -164,5 +172,6 @@ public class GameTest {
         Arrays.fill(expectedLeftmostColumn, 1);
         assertThat(leftmostColumn, is(expectedLeftmostColumn));
         assertThat(mockRenderer.isGameOver(), is(true));
+        assertThat(mockRenderer.getTimesGridUpdated(), is(gridHeight / 4));
     }
 }

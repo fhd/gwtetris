@@ -1,5 +1,7 @@
 package com.github.fhd.gwtetris.client.gamelogic;
 
+import java.util.*;
+
 /**
  * A piece (i.e. a tetromino) - the central element in this game. 
  */
@@ -79,14 +81,14 @@ public class Piece {
     /**
      * The horizontal position of the piece in blocks.
      */
-    int getX() {
+    public int getX() {
         return x;
     }
     
     /**
      * The vertical position of the piece in blocks.
      */
-    int getY() {
+    public int getY() {
         return y;
     }
 
@@ -108,7 +110,7 @@ public class Piece {
     /**
      * @return The matrix representation of this piece.
      */
-    int[][] getMatrix() {
+    public int[][] getMatrix() {
         return matrix;
     }
 
@@ -120,7 +122,7 @@ public class Piece {
      *          move down.
      * @return <code>true</code> if it was possible to move.
      */
-    boolean move(int x, int y) {
+    public boolean move(int x, int y) {
         int newX = this.x + x;
         int newY = this.y + y;
         if (detectCollision(newX, newY))
@@ -150,11 +152,19 @@ public class Piece {
     /**
      * Rotates the piece clockwise.
      */
-    void rotate() {
+    public void rotate() {
         int[][] previousMatrix = matrix;
         matrix = new int[previousMatrix[0].length][previousMatrix.length];
         for (int y = 0; y < previousMatrix.length; y++)
             for (int x = 0; x < previousMatrix[y].length; x++)
                 matrix[x][previousMatrix.length - 1 - y] = previousMatrix[y][x];
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < matrix.length; i++)
+            builder.append(Arrays.toString(matrix[i]));
+        return builder.toString();
     }
 }

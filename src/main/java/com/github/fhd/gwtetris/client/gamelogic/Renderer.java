@@ -9,18 +9,22 @@ public interface Renderer {
      * @param grid The grid to display.
      */
     void displayGrid(Grid grid);
-    
+
+    /**
+     * Updates the grid.
+     */
+    void updateGrid();
+
     /**
      * Displays the supplied piece.
      * @param piece The piece to display.
      */
     void displayPiece(Piece piece);
-    
+
     /**
-     * Updates the supplied piece.
-     * @param piece The piece to update.
+     * Updates the current piece.
      */
-    void updatePiece(Piece piece);
+    void updatePiece();
 
     /**
      * Indicates to the user that the game has ended.

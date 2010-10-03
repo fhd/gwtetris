@@ -4,7 +4,7 @@ package com.github.fhd.gwtetris.client.gamelogic;
 /**
  * The game logic.
  */
-class Game {
+public class Game {
     private Renderer renderer;
     private RNG rng;
     private Grid gameGrid;
@@ -19,7 +19,7 @@ class Game {
      * @param width The game grid's width in blocks.
      * @param height The game grid's height in blocks.
      */
-    Game(Renderer renderer, RNG rng, int width, int height) {
+    public Game(Renderer renderer, RNG rng, int width, int height) {
         this.renderer = renderer;
         this.rng = rng;
         this.gameGrid = new Grid(width, height);
@@ -28,21 +28,23 @@ class Game {
     /**
      * Starts the game.
      */
-    void start() {
+    public void start() {
         renderer.displayGrid(gameGrid);
     }
 
     /**
      * Proceeds the game for one step.
      */
-    void step() {
+    public void step() {
         if (currentPiece != null && currentPiece.move(0, 1))
-            renderer.updatePiece(currentPiece);
+            renderer.updatePiece();
         else {
-            if (currentPiece != null)
+            if (currentPiece != null) {
                 gameGrid.insertPiece(currentPiece);
-            renderer.displayPiece(
-                    currentPiece = Piece.createRandomPiece(rng, gameGrid));
+                renderer.updateGrid();
+            }
+            currentPiece = Piece.createRandomPiece(rng, gameGrid);
+            renderer.displayPiece(currentPiece);
             if (gameGrid.isFilled())
                 renderer.displayGameOver();
         }
