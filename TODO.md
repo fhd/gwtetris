@@ -1,4 +1,3 @@
-* Rewrite the gamelogic in an object oriented way.
 * Implement pause and exit.
 * Show pieces in different colours.
 * Try using GWT 2.0's LayoutPanels for the application-level layout.

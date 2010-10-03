@@ -94,14 +94,14 @@ public class Piece {
      * The width of the piece in blocks.
      */
     int getWidth() {
-        return type.getMatrix()[0].length;
+        return matrix[0].length;
     }
     
     /**
      * The height of the piece in blocks.
      */
     int getHeight() {
-        return type.getMatrix().length;
+        return matrix.length;
     }
 
 
@@ -121,14 +121,30 @@ public class Piece {
      * @return <code>true</code> if it was possible to move.
      */
     boolean move(int x, int y) {
-        if (this.x + x < 0
-            || this.x + x + getWidth() > grid.getWidth()
-            || this.y + y < 0
-            || this.y + y + getHeight() > grid.getHeight())
+        int newX = this.x + x;
+        int newY = this.y + y;
+        if (detectCollision(newX, newY))
             return false;
-        this.x += x;
-        this.y += y;
+        this.x = newX;
+        this.y = newY;
         return true;
+    }
+    
+    private boolean detectCollision(int x, int y) {
+        int width = getWidth();
+        int height = getHeight();
+
+        if (x < 0 || x + width > grid.getWidth()
+            || y < 0 || y + height > grid.getHeight())
+            return true;
+
+        int[][] gridMatrix = grid.getMatrix();
+        for (int i = y; i < y + height; i++)
+            for (int j = x; j < x + width; j++)
+                if (gridMatrix[i][j] > 0)
+                    return true;
+
+        return false;
     }
 
     /**

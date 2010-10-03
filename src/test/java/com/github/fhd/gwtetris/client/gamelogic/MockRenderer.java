@@ -7,6 +7,7 @@ package com.github.fhd.gwtetris.client.gamelogic;
 class MockRenderer implements Renderer {
     private Grid gameGrid;
     private Piece currentPiece;
+    boolean gameOver;
 
     /**
      * @return The last grid that was displayed.
@@ -20,6 +21,13 @@ class MockRenderer implements Renderer {
      */
     Piece getCurrentPiece() {
         return currentPiece;
+    }
+
+    /**
+     * @return <code>true</code> if the game has ended.
+     */
+    public boolean isGameOver() {
+        return gameOver;
     }
     
     @Override
@@ -35,5 +43,10 @@ class MockRenderer implements Renderer {
     @Override
     public void updatePiece(Piece piece) {
         currentPiece = piece;
+    }
+
+    @Override
+    public void displayGameOver() {
+        gameOver = true;
     }
 }

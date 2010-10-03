@@ -163,7 +163,7 @@ public class Grid {
         int[][] pieceMatrix = piece.getMatrix();
         for (int y = 0; y < piece.getY() + piece.getHeight(); y++)
             for (int x = 0; x < piece.getX() + piece.getWidth(); x++)
-                if (matrix[y][x] > 0 && pieceMatrix[y][x] > 0)
+                if (matrix[y][x] > 0)
                     return true;
 
         return false;

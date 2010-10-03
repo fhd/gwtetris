@@ -47,43 +47,59 @@ class Grid {
      */
     public void insertPiece(Piece piece) {
         int[][] pieceMatrix = piece.getMatrix();
-        for (int y = 0; y < pieceMatrix.length; y++) {
-            int[] line = pieceMatrix[y];
-            for (int x = 0; x < line.length; x++)
-                matrix[piece.getY() + y][piece.getX() + x] = line[x];
+        for (int i = 0; i < pieceMatrix.length; i++) {
+            int[] line = pieceMatrix[i];
+            for (int j = 0; j < line.length; j++)
+                matrix[piece.getY() + i][piece.getX() + j] = line[j];
         }
         removeCompletedLines();
     }
 
     private void removeCompletedLines() {
-        for (int x = 0; x < matrix[0].length; x++)
-            if (matrix[0][x] > 0)
+        for (int i = 0; i < matrix[0].length; i++)
+            if (matrix[0][i] > 0)
                 return;
 
-        for (int y = 0; y < matrix.length; y++) {
+        for (int i = 0; i < matrix.length; i++) {
             boolean rowCompleted = true;
-            for (int x = 0; x < matrix[y].length; x++)
-                if (matrix[y][x] == 0) {
+            for (int j = 0; j < matrix[i].length; j++)
+                if (matrix[i][j] == 0) {
                     rowCompleted = false;
                     break;
                 }
 
             if (rowCompleted)
-                matrix[y] = null;
+                matrix[i] = null;
         }
 
         boolean swapped;
         do {
             swapped = false;
-            for (int y = matrix.length - 1; y > 0; y--)
-                if (matrix[y] == null && matrix[y - 1] != null) {
-                    matrix[y] = matrix[y - 1];
-                    matrix[y - 1] = null;
+            for (int i = matrix.length - 1; i > 0; i--)
+                if (matrix[i] == null && matrix[i - 1] != null) {
+                    matrix[i] = matrix[i - 1];
+                    matrix[i - 1] = null;
                     swapped = true;
                 }
         } while (swapped);
 
-        for (int y = 0; matrix[y] == null; y++)
-            matrix[y] = new int[width];
+        for (int i = 0; matrix[i] == null; i++)
+            matrix[i] = new int[width];
+    }
+
+    /**
+     * @return <code>true</code> if one column of the grid is completely
+     *         filled.
+     */
+    boolean isFilled() {
+        for (int i = 0; i < width; i++) {
+            boolean filled = true;
+            for (int j = 0; j < height; j++)
+                if (matrix[j][i] == 0)
+                    filled = false;
+            if (filled)
+                return true;
+        }
+        return false;
     }
 }

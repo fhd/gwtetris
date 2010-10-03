@@ -6,11 +6,6 @@ import static org.hamcrest.CoreMatchers.*;
 import java.util.*;
 import org.junit.*;
 
-/*
- * TODO: Test the following:
- * - The current piece lands and leads to game over.
- */
-
 public class GameTest {
     MockRenderer mockRenderer;
     MockRNG mockRNG;
@@ -142,5 +137,32 @@ public class GameTest {
         game.step();
         Arrays.fill(expectedLastLine, 0);
         assertThat(gridMatrix[gridMatrix.length - 1], is(expectedLastLine));
+    }
+
+    @Test
+    public void gameOver() {
+        game.start();
+        assertThat(mockRenderer.isGameOver(), is(false));
+        Grid gameGrid = mockRenderer.getGameGrid();
+        int gridHeight = gameGrid.getHeight();
+        assertThat(gridHeight % 2, is(0));
+
+        mockRNG.setPiecePosition(0);
+        mockRNG.setPieceType(Piece.Type.I);
+        for (int i = 0; i < gridHeight / 4; i++) {
+            game.step();
+            mockRenderer.getCurrentPiece().rotate();
+            for (int j = 0; j < gridHeight; j++)
+                game.step();
+        }
+
+        int[][] matrix = gameGrid.getMatrix();
+        int[] leftmostColumn = new int[matrix.length];
+        for (int i = 0; i < matrix.length; i++)
+            leftmostColumn[i] = matrix[i][0];
+        int[] expectedLeftmostColumn = new int[matrix.length];
+        Arrays.fill(expectedLeftmostColumn, 1);
+        assertThat(leftmostColumn, is(expectedLeftmostColumn));
+        assertThat(mockRenderer.isGameOver(), is(true));
     }
 }

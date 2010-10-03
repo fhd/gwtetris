@@ -21,4 +21,9 @@ public interface Renderer {
      * @param piece The piece to update.
      */
     void updatePiece(Piece piece);
+
+    /**
+     * Indicates to the user that the game has ended.
+     */
+    void displayGameOver();
 }

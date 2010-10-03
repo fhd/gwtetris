@@ -9,7 +9,7 @@ class Game {
     private RNG rng;
     private Grid gameGrid;
     private Piece currentPiece;
-    
+
     /**
      * Creates a new game.
      * @param renderer The renderer that will be used to render all actions
@@ -24,7 +24,7 @@ class Game {
         this.rng = rng;
         this.gameGrid = new Grid(width, height);
     }
-    
+
     /**
      * Starts the game.
      */
@@ -43,6 +43,8 @@ class Game {
                 gameGrid.insertPiece(currentPiece);
             renderer.displayPiece(
                     currentPiece = Piece.createRandomPiece(rng, gameGrid));
+            if (gameGrid.isFilled())
+                renderer.displayGameOver();
         }
     }
 }
