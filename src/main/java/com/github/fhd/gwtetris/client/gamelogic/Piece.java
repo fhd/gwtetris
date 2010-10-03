@@ -159,7 +159,7 @@ public class Piece {
             for (int x = 0; x < previousMatrix[y].length; x++)
                 matrix[x][previousMatrix.length - 1 - y] = previousMatrix[y][x];
     }
-
+    
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

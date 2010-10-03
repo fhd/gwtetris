@@ -53,4 +53,13 @@ public class Game {
                 renderer.displayGameOver();
         }
     }
+
+    /**
+     * Proceed the game until the current piece has landed. 
+     */
+    public void fastStep() {
+        Piece previousPiece = currentPiece;
+        while (currentPiece == previousPiece)
+            step();
+    }
 }

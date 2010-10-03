@@ -70,6 +70,10 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
                         currentPiece.rotate();
                         event.cancel();
                         break;
+                    case KeyCodes.KEY_ENTER:
+                        game.fastStep();
+                        event.cancel();
+                        break;
                     }
                 }
             }
