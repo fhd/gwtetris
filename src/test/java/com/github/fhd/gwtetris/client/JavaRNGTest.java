@@ -5,7 +5,6 @@ import static org.hamcrest.number.OrderingComparisons.*;
 import static org.junit.Assert.*;
 
 import org.junit.*;
-
 import com.github.fhd.gwtetris.client.gamelogic.*;
 
 public class JavaRNGTest {
