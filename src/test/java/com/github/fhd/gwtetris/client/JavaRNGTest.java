@@ -14,21 +14,17 @@ public class JavaRNGTest {
     @SuppressWarnings("unchecked")
     @Test
     public void randomPiecePosition() {
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 40; i++)
             assertThat(rng.randomPiecePosition(i),
                        allOf(greaterThanOrEqualTo(0), lessThanOrEqualTo(i)));
-        }
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void randomPieceType() {
-        for (int i = 0; i < 14; i++) {
-            Piece.Type r = rng.randomPieceType();
-            int rTypeNo = r.getTypeNo();
-            assertThat(rTypeNo,
+        for (int i = 0; i < 14; i++)
+            assertThat(rng.randomPieceType().getTypeNo(),
                        allOf(greaterThanOrEqualTo(1),
                              lessThanOrEqualTo(Piece.Type.values().length)));
-        }
     }
 }
