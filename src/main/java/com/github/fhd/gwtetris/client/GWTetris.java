@@ -22,6 +22,7 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
     private Game game;
     private Grid grid;
     private Piece currentPiece;
+    private LayoutPanel piecePanel;
     @UiField LayoutPanel gridPanel;
     @UiField LayoutPanel previewPanel;
     @UiField Button resumeButton;
@@ -35,6 +36,7 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
         style.ensureInjected();
         game = new Game(this, new JavaRNG(),
                         Constants.GRID_COLS, Constants.GRID_ROWS);
+        piecePanel = new LayoutPanel();
         RootPanel.get().add(uiBinder.createAndBindUi(this));
         resumeButton.setFocus(true);
     }
@@ -89,6 +91,7 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
     @Override
     public void updateGrid() {
         drawMatrix(grid.getMatrix(), gridPanel);
+        gridPanel.add(piecePanel);
     }
 
     private void drawMatrix(int[][] matrix, LayoutPanel panel) {
@@ -116,7 +119,8 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
     @Override
     public void displayPiece(Piece piece) {
         currentPiece = piece;
-        // TODO: Display the piece.
+        drawMatrix(piece.getMatrix(), piecePanel);
+        updatePiece();
     }
 
     @Override
@@ -131,7 +135,13 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
 
     @Override
     public void updatePiece() {
-        // TODO: Move/rotate the piece.
+        gridPanel.setWidgetLeftRight(piecePanel,
+                currentPiece.getX() * Constants.BLOCK_WIDTH,
+                Unit.PX, 0, Unit.PX);
+        gridPanel.setWidgetTopBottom(piecePanel,
+                currentPiece.getY() * Constants.BLOCK_HEIGHT,
+                Unit.PX, 0, Unit.PX);
+        // TODO: Rotate the piece.
     }
 
     @Override
