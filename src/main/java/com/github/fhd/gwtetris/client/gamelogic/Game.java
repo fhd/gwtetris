@@ -38,7 +38,7 @@ public class Game {
      * Proceeds the game for one step.
      */
     public void step() {
-        if (currentPiece != null && currentPiece.move(0, 1))
+        if (currentPiece != null && currentPiece.moveDown())
             renderer.updatePiece();
         else {
             if (currentPiece != null) {

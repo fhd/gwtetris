@@ -50,9 +50,9 @@ public class GameTest {
         game.start();
         game.step();
         Piece piece = mockRenderer.getCurrentPiece();
-        assertThat(piece.move(-1, 0), is(true));
+        assertThat(piece.moveLeft(), is(true));
         assertThat(piece.getX(), is(0));
-        assertThat(piece.move(-1, 0), is(false));
+        assertThat(piece.moveLeft(), is(false));
         assertThat(piece.getX(), is(0));
     }
 
@@ -64,9 +64,10 @@ public class GameTest {
         Piece piece = mockRenderer.getCurrentPiece();
         int expectedPosition =
             mockRenderer.getGameGrid().getWidth() - piece.getWidth();
-        assertThat(piece.move(expectedPosition, 0), is(true));
+        for (int i = 0; i < expectedPosition; i++)
+            assertThat(piece.moveRight(), is(true));
         assertThat(piece.getX(), is(expectedPosition));
-        assertThat(piece.move(1, 0), is(false));
+        assertThat(piece.moveRight(), is(false));
         assertThat(piece.getX(), is(expectedPosition));
     }
 

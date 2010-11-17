@@ -115,14 +115,30 @@ public class Piece {
     }
 
     /**
-     * Moves the piece by the specified number of blocks.
-     * @param x The number of blocks to move on the x-axis. Positive values
-     *          move to the right.
-     * @param y The number of blocks to move on the y-axis. Positive values
-     *          move down.
+     * Moves the piece one block to the left.
      * @return <code>true</code> if it was possible to move.
      */
-    public boolean move(int x, int y) {
+    public boolean moveLeft() {
+        return move(-1, 0);
+    }
+
+    /**
+     * Moves the piece one block to the right.
+     * @return <code>true</code> if it was possible to move.
+     */
+    public boolean moveRight() {
+        return move(1, 0);
+    }
+    
+    /**
+     * Moves the piece one block down.
+     * @return <code>true</code> if it was possible to move.
+     */
+    public boolean moveDown() {
+        return move(0, 1);
+    }
+
+    private boolean move(int x, int y) {
         int newX = this.x + x;
         int newY = this.y + y;
         if (detectCollision(newX, newY))

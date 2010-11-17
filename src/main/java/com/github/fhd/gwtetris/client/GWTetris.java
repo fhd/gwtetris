@@ -55,15 +55,15 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
                 if (event.getTypeInt() == Event.ONKEYPRESS) {
                     switch (event.getNativeEvent().getKeyCode()) {
                     case KeyCodes.KEY_LEFT:
-                        currentPiece.move(-1, 0);
+                        currentPiece.moveLeft();
                         event.cancel();
                         break;
                     case KeyCodes.KEY_RIGHT:
-                        currentPiece.move(1, 0);
+                        currentPiece.moveRight();
                         event.cancel();
                         break;
                     case KeyCodes.KEY_DOWN:
-                        currentPiece.move(0, 1);
+                        currentPiece.moveDown();
                         event.cancel();
                         break;
                     case KeyCodes.KEY_UP:
