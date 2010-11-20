@@ -2,6 +2,7 @@ target
 .settings
 .classpath
 .project
+.externalToolBuilders
 src/main/webapp/gwtetris
 src/main/webapp/WEB-INF/classes
 src/main/webapp/WEB-INF/lib
