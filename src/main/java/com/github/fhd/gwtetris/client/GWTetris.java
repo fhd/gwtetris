@@ -25,6 +25,7 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
     private boolean started;
     private boolean paused;
     private LayoutPanel piecePanel;
+    private DecoratedPopupPanel popup;
     @UiField LayoutPanel gridPanel;
     @UiField LayoutPanel previewPanel;
     @UiField Button resumeButton;
@@ -39,62 +40,76 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
         game = new Game(this, new JavaRNG(),
                         Constants.GRID_COLS, Constants.GRID_ROWS);
         piecePanel = new LayoutPanel();
+        popup = new DecoratedPopupPanel();
         RootPanel.get().add(uiBinder.createAndBindUi(this));
         resumeButton.setFocus(true);
+
+        new Timer() {
+            @Override
+            public void run() {
+                if (started && !paused)
+                    game.step();
+            }
+        }.scheduleRepeating(Constants.STEP_TIME);
+            
+        Event.addNativePreviewHandler(new NativePreviewHandler() {
+                @Override
+                public void onPreviewNativeEvent(NativePreviewEvent event) {
+                    if (event.getTypeInt() == Event.ONKEYPRESS) {
+                        onKey(event.getNativeEvent().getKeyCode());
+                        //                        event.cancel();
+                    }
+                }
+        });
+    }
+
+    private void onKey(int keyCode) {
+        if (!started || paused)
+            return;
+                
+        switch (keyCode) {
+        case KeyCodes.KEY_LEFT:
+            currentPiece.moveLeft();
+            break;
+        case KeyCodes.KEY_RIGHT:
+            currentPiece.moveRight();
+            break;
+        case KeyCodes.KEY_DOWN:
+            currentPiece.moveDown();
+            break;
+        case KeyCodes.KEY_UP:
+            currentPiece.rotate();
+            break;
+        case KeyCodes.KEY_ENTER:
+            game.fastStep();
+            break;
+        }
     }
     
     @UiHandler("resumeButton")
     void handleClick(ClickEvent event) {
         if (!started) {
             game.start();
-
-            new Timer() {
-                @Override
-                public void run() {
-                    if (!paused)
-                        game.step();
-                }
-            }.scheduleRepeating(Constants.STEP_TIME);
-            
-            Event.addNativePreviewHandler(new NativePreviewHandler() {
-                @Override
-                public void onPreviewNativeEvent(NativePreviewEvent event) {
-                    if (paused)
-                        return;
-                    
-                    if (event.getTypeInt() == Event.ONKEYPRESS) {
-                        switch (event.getNativeEvent().getKeyCode()) {
-                        case KeyCodes.KEY_LEFT:
-                            currentPiece.moveLeft();
-                            event.cancel();
-                            break;
-                        case KeyCodes.KEY_RIGHT:
-                            currentPiece.moveRight();
-                            event.cancel();
-                            break;
-                        case KeyCodes.KEY_DOWN:
-                            currentPiece.moveDown();
-                            event.cancel();
-                            break;
-                        case KeyCodes.KEY_UP:
-                            currentPiece.rotate();
-                            event.cancel();
-                            break;
-                        case KeyCodes.KEY_ENTER:
-                            game.fastStep();
-                            event.cancel();
-                            break;
-                        }
-                    }
-                }
-            });
-
             started = true;
         } else {
             paused = !paused;
         }
 
         resumeButton.setText(paused ? "Resume" : "Pause");
+        resumeButton.setFocus(paused);
+        if (paused)
+            showMessage("Paused");
+        else
+            hideMessage();
+    }
+
+    private void showMessage(String message) {
+        popup.setWidget(new Label(message));
+        popup.center();
+    }
+
+    private void hideMessage() {
+        popup.hide();
     }
 
     @Override
@@ -161,6 +176,9 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
 
     @Override
     public void displayGameOver() {
-        // TODO: Display "game over".
+        paused = false;
+        started = false;
+        resumeButton.setText("Start");
+        showMessage("Game Over");
     }
 }
