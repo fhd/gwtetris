@@ -55,10 +55,8 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
         Event.addNativePreviewHandler(new NativePreviewHandler() {
                 @Override
                 public void onPreviewNativeEvent(NativePreviewEvent event) {
-                    if (event.getTypeInt() == Event.ONKEYPRESS) {
+                    if (event.getTypeInt() == Event.ONKEYPRESS)
                         onKey(event.getNativeEvent().getKeyCode());
-                        //                        event.cancel();
-                    }
                 }
         });
     }
@@ -149,7 +147,6 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
     @Override
     public void displayPiece(Piece piece) {
         currentPiece = piece;
-        drawMatrix(piece.getMatrix(), piecePanel);
         updatePiece();
     }
 
@@ -165,13 +162,13 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
 
     @Override
     public void updatePiece() {
+        drawMatrix(currentPiece.getMatrix(), piecePanel);
         gridPanel.setWidgetLeftRight(piecePanel,
                 currentPiece.getX() * Constants.BLOCK_WIDTH,
                 Unit.PX, 0, Unit.PX);
         gridPanel.setWidgetTopBottom(piecePanel,
                 currentPiece.getY() * Constants.BLOCK_HEIGHT,
                 Unit.PX, 0, Unit.PX);
-        // TODO: Rotate the piece.
     }
 
     @Override
