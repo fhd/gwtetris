@@ -22,6 +22,8 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
     private Game game;
     private Grid grid;
     private Piece currentPiece;
+    private boolean started;
+    private boolean paused;
     private LayoutPanel piecePanel;
     @UiField LayoutPanel gridPanel;
     @UiField LayoutPanel previewPanel;
@@ -43,43 +45,56 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
     
     @UiHandler("resumeButton")
     void handleClick(ClickEvent event) {
-        game.start();
-        new Timer() {
-            @Override
-            public void run() {
-                game.step();
-            }
-        }.scheduleRepeating(Constants.STEP_TIME);
-        
-        Event.addNativePreviewHandler(new NativePreviewHandler() {
-            @Override
-            public void onPreviewNativeEvent(NativePreviewEvent event) {
-                if (event.getTypeInt() == Event.ONKEYPRESS) {
-                    switch (event.getNativeEvent().getKeyCode()) {
-                    case KeyCodes.KEY_LEFT:
-                        currentPiece.moveLeft();
-                        event.cancel();
-                        break;
-                    case KeyCodes.KEY_RIGHT:
-                        currentPiece.moveRight();
-                        event.cancel();
-                        break;
-                    case KeyCodes.KEY_DOWN:
-                        currentPiece.moveDown();
-                        event.cancel();
-                        break;
-                    case KeyCodes.KEY_UP:
-                        currentPiece.rotate();
-                        event.cancel();
-                        break;
-                    case KeyCodes.KEY_ENTER:
-                        game.fastStep();
-                        event.cancel();
-                        break;
+        if (!started) {
+            game.start();
+
+            new Timer() {
+                @Override
+                public void run() {
+                    if (!paused)
+                        game.step();
+                }
+            }.scheduleRepeating(Constants.STEP_TIME);
+            
+            Event.addNativePreviewHandler(new NativePreviewHandler() {
+                @Override
+                public void onPreviewNativeEvent(NativePreviewEvent event) {
+                    if (paused)
+                        return;
+                    
+                    if (event.getTypeInt() == Event.ONKEYPRESS) {
+                        switch (event.getNativeEvent().getKeyCode()) {
+                        case KeyCodes.KEY_LEFT:
+                            currentPiece.moveLeft();
+                            event.cancel();
+                            break;
+                        case KeyCodes.KEY_RIGHT:
+                            currentPiece.moveRight();
+                            event.cancel();
+                            break;
+                        case KeyCodes.KEY_DOWN:
+                            currentPiece.moveDown();
+                            event.cancel();
+                            break;
+                        case KeyCodes.KEY_UP:
+                            currentPiece.rotate();
+                            event.cancel();
+                            break;
+                        case KeyCodes.KEY_ENTER:
+                            game.fastStep();
+                            event.cancel();
+                            break;
+                        }
                     }
                 }
-            }
-        });
+            });
+
+            started = true;
+        } else {
+            paused = !paused;
+        }
+
+        resumeButton.setText(paused ? "Resume" : "Pause");
     }
 
     @Override

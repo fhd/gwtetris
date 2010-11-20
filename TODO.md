@@ -1,4 +1,3 @@
-* Implement pause and exit.
 * Show pieces in different colours.
 * Try using GWT 2.0's LayoutPanels for the application-level layout.
 * Use Constants in CSS via CssResource.
