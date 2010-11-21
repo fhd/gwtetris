@@ -6,7 +6,7 @@
     <groupId>com.github.fhd.gwtetris</groupId>
     <artifactId>gwtetris</artifactId>
     <packaging>war</packaging>
-    <version>0.1.0</version>
+    <version>0.2.0-SNAPSHOT</version>
     <name>GWTetris</name>
     <description>A Tetris clone written in Java using the Google Web Toolkit</description>
     <url>http://github.com/fhd/gwtetris</url>
