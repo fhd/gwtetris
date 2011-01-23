@@ -1,3 +1,4 @@
+* Fix keyboard controls in Chrome.
 * Improve performance
 * Use images instead of CSS for blocks.
 * Add a distinct style for each piece.
