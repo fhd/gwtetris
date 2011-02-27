@@ -1,6 +1,6 @@
 body {
-    margin: auto;
-    max-width: 540px;
+	width: 340px;
+	margin: auto;
 }
 
 h1 {
@@ -10,7 +10,7 @@ h1 {
 .grid, .sidebar {
     float: left;
     margin: 10px;
-    height: 640px;
+    height: 400px;
 }
 
 .grid, .preview {
@@ -18,7 +18,7 @@ h1 {
 }
 
 .grid {
-    width: 400px;
+    width: 200px;
 }
 
 .sidebar {
