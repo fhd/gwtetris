@@ -1,3 +1,6 @@
+0.2.0
+=====
+
 0.1.1 (2011-02-27)
 ==================
 * Fixed keyboard controls in Chrome and IE.
