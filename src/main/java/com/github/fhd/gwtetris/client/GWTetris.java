@@ -51,11 +51,11 @@ class GWTetris extends UIObject implements EntryPoint, Renderer {
                     game.step();
             }
         }.scheduleRepeating(Constants.STEP_TIME);
-            
+
         Event.addNativePreviewHandler(new NativePreviewHandler() {
                 @Override
                 public void onPreviewNativeEvent(NativePreviewEvent event) {
-                    if (event.getTypeInt() == Event.ONKEYPRESS)
+                    if (event.getTypeInt() == Event.ONKEYUP)
                         onKey(event.getNativeEvent().getKeyCode());
                 }
         });
