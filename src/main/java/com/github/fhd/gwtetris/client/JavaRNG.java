@@ -14,7 +14,7 @@ class JavaRNG implements RNG {
     @Override
     public Piece.Type randomPieceType() {
         Piece.Type[] pieceTypes = Piece.Type.values();
-        return pieceTypes[randomNum(1, pieceTypes.length - 1)];
+        return pieceTypes[randomNum(0, pieceTypes.length - 1)];
     }
 
     private static int randomNum(int start, int end) {

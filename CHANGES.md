@@ -1,5 +1,6 @@
 0.2.0
 =====
+* Fixed a problem that prevented the I piece from appearing.
 
 0.1.1 (2011-02-27)
 ==================
