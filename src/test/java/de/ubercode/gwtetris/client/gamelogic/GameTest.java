@@ -1,4 +1,4 @@
-package com.github.fhd.gwtetris.client.gamelogic;
+package de.ubercode.gwtetris.client.gamelogic;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;

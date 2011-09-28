@@ -1,4 +1,4 @@
-package com.github.fhd.gwtetris.client.gamelogic;
+package de.ubercode.gwtetris.client.gamelogic;
 
 /**
  * The renderer that will display the game's actions to the user.

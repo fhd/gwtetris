@@ -1,11 +1,11 @@
-package com.github.fhd.gwtetris.client;
+package de.ubercode.gwtetris.client;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.number.OrderingComparisons.*;
 import static org.junit.Assert.*;
 
 import org.junit.*;
-import com.github.fhd.gwtetris.client.gamelogic.*;
+import de.ubercode.gwtetris.client.gamelogic.*;
 
 public class JavaRNGTest {
     private RNG rng = new JavaRNG();

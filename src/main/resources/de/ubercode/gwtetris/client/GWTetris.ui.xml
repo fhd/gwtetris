@@ -1,6 +1,6 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui">
-    <ui:with field="res" type="com.github.fhd.gwtetris.client.Resources"/>
+    <ui:with field="res" type="de.ubercode.gwtetris.client.Resources"/>
     <g:HTMLPanel>
         <g:LayoutPanel ui:field="gridPanel" styleName="{res.style.grid}"/>
         <div class="{res.style.sidebar}">

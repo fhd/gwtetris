@@ -1,4 +1,4 @@
-package com.github.fhd.gwtetris.client.gamelogic;
+package de.ubercode.gwtetris.client.gamelogic;
 
 /**
  * A random number generator. Creates all random numbers used by the game.

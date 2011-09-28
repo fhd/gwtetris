@@ -1,4 +1,4 @@
-package com.github.fhd.gwtetris.client;
+package de.ubercode.gwtetris.client;
 
 /**
  * Constants for the user interface.

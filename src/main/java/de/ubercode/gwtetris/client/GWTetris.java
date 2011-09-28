@@ -1,7 +1,7 @@
-package com.github.fhd.gwtetris.client;
+package de.ubercode.gwtetris.client;
 
-import com.github.fhd.gwtetris.client.gamelogic.*;
-import com.github.fhd.gwtetris.client.gamelogic.Grid;
+import de.ubercode.gwtetris.client.gamelogic.*;
+import de.ubercode.gwtetris.client.gamelogic.Grid;
 import com.google.gwt.core.client.*;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.*;

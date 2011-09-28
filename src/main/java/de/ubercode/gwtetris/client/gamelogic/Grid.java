@@ -1,4 +1,4 @@
-package com.github.fhd.gwtetris.client.gamelogic;
+package de.ubercode.gwtetris.client.gamelogic;
 
 import java.util.*;
 

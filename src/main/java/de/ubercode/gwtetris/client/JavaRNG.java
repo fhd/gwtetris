@@ -1,6 +1,6 @@
-package com.github.fhd.gwtetris.client;
+package de.ubercode.gwtetris.client;
 
-import com.github.fhd.gwtetris.client.gamelogic.*;
+import de.ubercode.gwtetris.client.gamelogic.*;
 
 /**
  * Random number generator that uses Java's random mechanism.

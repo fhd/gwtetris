@@ -1,4 +1,4 @@
-package com.github.fhd.gwtetris.client.gamelogic;
+package de.ubercode.gwtetris.client.gamelogic;
 
 /**
  * A renderer that pretends to display the grid to the user in order to help

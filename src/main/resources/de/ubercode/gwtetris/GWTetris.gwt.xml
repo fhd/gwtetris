@@ -1,6 +1,6 @@
 <module rename-to="gwtetris">
       <inherits name="com.google.gwt.user.User"/>
       <inherits name="com.google.gwt.user.theme.standard.Standard"/>
-      <entry-point class="com.github.fhd.gwtetris.client.GWTetris"/>
+      <entry-point class="de.ubercode.gwtetris.client.GWTetris"/>
       <source path="client" excludes="**/*Test.java"/>
 </module>

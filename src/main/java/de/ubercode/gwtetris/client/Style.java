@@ -1,4 +1,4 @@
-package com.github.fhd.gwtetris.client;
+package de.ubercode.gwtetris.client;
 
 import com.google.gwt.resources.client.*;
 
